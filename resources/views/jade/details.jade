@@ -1,0 +1,28 @@
+extends layout.jade
+
+
+block content
+    
+    -include 'assets/controllers/details_function.php';
+    
+    .content
+        #img_cont
+            #frame
+                img(src="assets/img/logo.gif", alt="")
+        #data_panel_din
+            - switch ($module) {
+            -    case "DIN":
+                   include DIN
+            -    break;        
+            -    case "COMS":
+                   include COMS
+            -    break;        
+            -    case "GAS":
+                   include GAS
+            -    break;        
+            -    case "CXP":
+                   include CXP
+            -    break;        
+            -}
+            
+                        

@@ -1,0 +1,118 @@
+
+.row
+    label.label_container Movimiento: 
+    .data_container(style="width:180px;") &nbsp
+        - echo $data['Mov'];
+    .data_container(style="width:70px;") &nbsp
+        - echo $data['MovID'];
+    label.label_container Proyecto: 
+    .data_container(style="width:120px;") &nbsp
+        - echo $data['Proyecto'];
+    .data_container(style="width:40px;") &nbsp 
+    label.label_container Moneda:
+    .data_container(style="width:70px;") &nbsp 
+        - echo $data['Moneda'];
+    .data_container(style="width:40px;") &nbsp
+        - echo $data['TipoCambio'];
+.row_panel
+    label.label_container Fecha Emisión: 
+    .data_container(style="width:120px;") &nbsp 
+        - echo date('d/m/Y', strtotime($data['FechaEmision']));
+    label.label_container Fecha Proveedor: 
+    .data_container(style="width:120px;")  &nbsp
+        - echo date('d/m/Y', strtotime($data['FechaProveedor']));
+    label.label_container Fecha Requerida: 
+    .data_container(style="width:120px;")  &nbsp
+        - echo date('d/m/Y', strtotime($data['FechaRequerida']));
+.row_panel
+    label.label_container Agente: 
+    .data_container(style="width:120px;")  &nbsp
+        - echo $data['Agente'];
+    label.label_container Fecha Entrega: 
+    .data_container(style="width:120px;")  &nbsp
+        - echo date('d/m/Y', strtotime($data['FechaEntrega']));
+.row_panel
+    hr
+.row_panel
+    label.label_container Proveedor: 
+    .data_container(style="width:120px;") &nbsp 
+        - echo $data['Proveedor'];
+    .data_container(style="width:180px;") &nbsp 
+        - echo $data['Nombre'];
+    .data_container.num(style="width:120px; text-align:center;") &nbsp
+        - echo $data['ListaPreciosEsp'];
+.row_panel
+    label.label_container Descuento Global: 
+    .data_container(style="width:120px;") &nbsp  
+        - echo $data['DescuentoGlobal'];
+    label.label_container Condicion Pago: 
+    .data_container(style="width:120px;") &nbsp  
+        - echo $data['Condicion'];
+    label.label_container Vencimiento: 
+    .data_container(style="width:120px;")  &nbsp
+        - echo date('d/m/Y', strtotime($data['Vencimiento']));
+    //- .data_container(style="width:160px;") &nbsp
+.row_panel
+    hr
+.row_panel
+    label.label_container Referencia: 
+    .data_container(style="width:300px;") &nbsp
+        - echo $data['Referencia'];
+.row_panel
+    label.label_container Concepto:
+    .data_container(style="width:190px;") &nbsp 
+        - echo $data['Concepto'];
+    label.label_container Almacen: 
+    .data_container(style="width:190px;") &nbsp 
+        - echo $data['Almacen'];
+    label.label_container Forma Envio: 
+    .data_container(style="width:190px;") &nbsp 
+        - echo $data['FormaEnvio'];
+    
+
+    
+
+div#control_panel_results_din(style="height:170px;")
+    #titles_row(style="width:1600px;")
+        div Articulo
+        div Cantidad
+        div Unidad                    
+        div Inventario                    
+        div Costo Unitario                    
+        div Desc.                  
+        div Importe                  
+        div Fecha Requerida                  
+        div Almacen                
+        
+    - foreach($details as $key => $value){
+    .content_row(style="width:1600px;")
+        
+        div &nbsp
+            - echo $value['Articulo'];
+        div &nbsp
+            - echo $value['Cantidad'];
+        div &nbsp
+            - echo $value['Unidad'];
+        div &nbsp
+            - echo $value['CantidadInventario'];
+        div.num &nbsp
+            - echo '$ '.number_format($value['Costo'], 2);
+        div &nbsp
+            - echo $value['Descuento'];
+        div.num &nbsp
+            - echo '$ '.number_format($value['Costo']*$value['Cantidad'], 2);
+            - $total_import = $total_import + $value['Costo']*$value['Cantidad'];
+        div &nbsp
+            - echo date('d/m/Y', strtotime($value['FechaRequerida']));
+        div &nbsp
+            - echo $value['Almacen'];
+    -}
+.row_panel(style='float:right;')
+    label.label_container Importe Total:
+    .data_container(style="width:130px;")  &nbsp 
+        - echo '$ '.number_format($total_import, 2);
+        - echo $data['Condicion'];
+
+.row_panel(style="margin-top:40px;")
+    a(href="javascript: self.close()")
+        input#back_btn(type="button", value="cerrar")

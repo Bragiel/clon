@@ -1,0 +1,40 @@
+extends layout.jade
+
+block content
+	#big_frame(style="background-color:red;width:90%;margin:auto;")
+		#frame
+			img(src="assets/img/logo.gif", alt="")
+		#login
+			form(action="portal.php" name="login" method="POST")
+				
+				div
+					label(for="user") USUARIO:
+				div
+					input(type="text",name="user")
+				div
+					label(for="pass") CONTRASEÑA:
+				div
+					input(type="password",name="pass")
+				div
+					label(for="business") Empresa:
+				div
+					select(name="business" disabled)
+						option(value="") 
+				div
+					label(for="branch") Sucursal:
+				div
+					select(name="branch" disabled)
+						option(value="") 
+					
+				div
+					input(type="button",name="login",value="ACCESO")
+				input(type="hidden" name="db" value="")
+				input(type="hidden" name="branch" value="")
+
+
+
+					
+	
+
+
+	

@@ -1,0 +1,86 @@
+
+.row
+    label.label_container Movimiento: 
+    .data_container(style="width:180px;") &nbsp
+        - echo $data['Mov'];
+    .data_container(style="width:70px;") &nbsp
+        - echo $data['MovID'];
+    label.label_container Proyecto: 
+    .data_container(style="width:120px;") &nbsp
+        - echo $data['Proyecto'];
+    .data_container(style="width:40px;") &nbsp 
+    label.label_container Moneda:
+    .data_container(style="width:70px;") &nbsp 
+        - echo $data['Moneda1'];
+    .data_container(style="width:40px;") &nbsp
+        - echo $data['TipoCambio'];
+.row_panel
+    label.label_container Fecha Emisión: 
+    .data_container(style="width:120px;") &nbsp 
+        - echo date('d/m/Y', strtotime($data['FechaEmision']));
+    label.label_container Programado para: 
+    .data_container(style="width:120px;")  &nbsp
+        - echo date('d/m/Y', strtotime($data['FechaProgramada']));
+    .data_container(style="width:120px;")  &nbsp
+        - echo $data['Prioridad'];
+.row_panel
+    hr
+.row_panel
+    label.label_container Cuenta: 
+    .data_container(style="width:120px;") &nbsp 
+        - echo $data['Cuenta'];
+    .data_container(style="width:180px;") &nbsp 
+        - echo $data['Descripcion1'];
+    .data_container.num(style="width:120px;") &nbsp
+        - echo '$ '.number_format($data['Saldo'], 2);
+.row_panel
+    label.label_container Beneficiario: 
+    .data_container(style="width:260px;") &nbsp  
+        - echo $data['BeneficiarioNombre'];
+    //- .data_container(style="width:160px;") &nbsp
+.row_panel
+    hr
+.row_panel
+    label.label_container Importe: 
+    .data_container.num(style="width:130px;") &nbsp
+        - echo '$ '.number_format($data['Importe'], 2);
+.row_panel
+    label.label_container Concepto:
+    .data_container(style="width:190px;") &nbsp 
+        - echo $data['Concepto'];
+.row_panel
+    label.label_container Referencia: 
+    .data_container(style="width:190px;") &nbsp 
+        - echo $data['Referencia'];
+    //- .data_container(style="width:150px; float:right;") &nbsp Referencia
+.row_panel
+    label.label_container Observaciones:
+    .data_container(style="width:250px;") &nbsp
+        - echo $data['Observaciones'];
+
+    
+
+div#control_panel_results_din(style="height:170px;")
+    #titles_row(style="width:1600px;")
+        div Forma de Pago
+        div Referencia
+        div Importe                    
+        
+    - foreach($details as $key => $value){
+    .content_row(style="width:1600px;")
+        
+        div &nbsp
+            - echo $value['FormaPago'];
+        div &nbsp
+            - echo $value['Referencia'];
+        div.num &nbsp
+            - echo '$ '.number_format($value['Importe'], 2);
+            - $total_import = $total_import + $value['Importe'];
+    -}
+.row_panel(style='float:right;')
+    label.label_container Importe Total:
+    .data_container(style="width:130px;")  &nbsp 
+        - echo '$ '.number_format($total_import, 2);
+.row_panel(style="margin-top:40px;")
+    a(href="javascript: self.close()")
+        input#back_btn(type="button", value="cerrar")

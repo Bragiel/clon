@@ -1,0 +1,123 @@
+
+.row
+    label.label_container Movimiento: 
+    .data_container(style="width:180px;") &nbsp
+        - echo $data['Mov'];
+    .data_container(style="width:70px;") &nbsp
+        - echo $data['MovID'];
+    label.label_container Proyecto: 
+    .data_container(style="width:120px;") &nbsp
+        - echo $data['Proyecto'];
+    .data_container(style="width:40px;") &nbsp 
+    label.label_container Moneda:
+    .data_container(style="width:70px;") &nbsp 
+        - echo $data['Moneda'];
+    .data_container(style="width:40px;") &nbsp
+        - echo $data['TipoCambio'];
+.row_panel
+    label.label_container Fecha Emisión: 
+    .data_container(style="width:120px;") &nbsp 
+        - echo date('d/m/Y', strtotime($data['FechaEmision']));
+    label.label_container Actividad: 
+    .data_container(style="width:120px;")  &nbsp
+        - echo $data['Actividad'];
+    
+.row_panel
+    hr
+.row_panel
+    label.label_container Acreedor/Resp: 
+    .data_container(style="width:120px;") &nbsp 
+        - echo $data['Acreedor'];
+    .data_container(style="width:260px;") &nbsp 
+        - echo $data['Nombre'];
+    label.label_container Fecha Requerida: 
+    .data_container(style="width:120px; text-align:center;") &nbsp 
+        - echo date('d/m/Y', strtotime($data['FechaRequerida']));
+.row_panel
+    label.label_container Observaciones: 
+    .data_container(style="width:632px;") &nbsp  
+        - echo $data['Observaciones'];
+.row_panel
+    label.label_container Cuenta: 
+    .data_container(style="width:120px;") &nbsp  
+        - echo $data['CtaDinero'];
+    label.label_container Forma Pago: 
+    .data_container(style="width:150px;") &nbsp  
+        - echo $data['FormaPago'];
+.row_panel
+    label.label_container Clasificación: 
+    .data_container(style="width:120px;") &nbsp  
+        - echo $data['Clase'];
+    label.label_container Subclasificación: 
+    .data_container(style="width:150px;") &nbsp  
+        - echo $data['SubClase'];
+.row_panel
+    label.label_container Condición: 
+    .data_container(style="width:120px;") &nbsp  
+        - echo $data['Condicion'];
+    label.label_container Vencimiento: 
+    .data_container(style="width:150px; text-align:center;") &nbsp  
+        - echo date('d/m/Y', strtotime($data['Vencimiento']));
+.row_panel
+    hr
+.row_panel
+    label.label_container Saldo: 
+    .data_container.num(style="width:190px;") &nbsp
+        - echo '$'.number_format($data['Saldo'],2);
+
+
+
+div#control_panel_results_din(style="height:170px;")
+    #titles_row(style="width:1600px;")
+        div Concepto
+        div Referencia
+        div Cantidad                    
+        div Precio                    
+        div Importe                
+        div % Deducible                  
+        div % IVA                  
+        div IVA               
+        //- div % Retencion1                
+        //- div Retencion ISR            
+        //- div Retencion2            
+        div Retencion IVA            
+        div Total            
+        div Centro de Costos         
+        
+    - foreach($details as $key => $value){
+    .content_row(style="width:1600px;")
+        
+        div &nbsp
+            - echo $value['Concepto'];
+        div &nbsp
+            - echo $value['Referencia'];
+        div &nbsp
+            - echo $value['Cantidad'];
+        div &nbsp
+            - echo '$ '.number_format($value['Precio'], 2);
+        div.num &nbsp
+            - echo '$ '.number_format($value['Importe'], 2);
+        div &nbsp
+            - echo $value['PorcentajeDeducible'];
+        div &nbsp
+            - echo $value['PorcentajeImpuestos'];
+        //- div.num &nbsp
+        //-     - echo '$ '.number_format($value['Costo']*$value['Cantidad'], 2);
+        //-     - $total_import = $total_import + $value['Costo']*$value['Cantidad'];
+        div.num &nbsp
+            - echo '$ '.number_format($value['Impuestos'], 2);
+        div.num &nbsp
+            - echo '$ '.number_format($value['RetencionG2'], 2);
+        div.num &nbsp
+            - echo '$ '.number_format($value['Cantidad']*$value['Precio']+$value['Impuestos']-$value['RetencionG2'], 2);
+            - $total_import = $total_import + $value['Cantidad']*$value['Precio']+$value['Impuestos']-$value['RetencionG2'];
+        div &nbsp
+            - echo $value['ContUso'];
+    -}
+.row_panel(style='float:right;')
+    label.label_container Importe Total:
+    .data_container(style="width:130px;")  &nbsp 
+        - echo '$ '.number_format($total_import, 2);
+.row_panel(style="margin-top:40px;")
+    a(href="javascript: self.close()")
+        input#back_btn(type="button", value="cerrar")

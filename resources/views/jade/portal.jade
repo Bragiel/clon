@@ -1,0 +1,140 @@
+
+
+extends layout.jade
+
+block content
+	-session_start();
+	-if (!$_SESSION["log"]){
+	-	header("Location:index.php");
+	-}
+
+	script runOnLoad(Dropdown.initialise);
+
+	.content
+		- echo '<input type=hidden name=db value='.$_SESSION['db'].'>';
+		- echo '<input type=hidden name=usrname value='.$_SESSION['usrname'].'>';
+		- echo '<input type=hidden name=business value='.$_SESSION['business'].'>';
+		#img_cont
+			#frame
+				img(src="assets/img/logo.gif", alt="")
+		#menu
+			- echo $_SESSION['html'];
+
+		#nav_bar
+			div
+				strong Mov. Previo
+			div
+				strong Mov. Actual
+			div
+				strong Mov. Siguiente
+
+		#control_panel
+			div.control_menu
+				div
+					label(for="search") Buscar:
+				div
+					label(for="mov") Movimiento:
+				div
+					label(for="status") Estatus:
+				div
+					label(for="date") Fecha:
+				div
+					label(for="user") Usuario:
+				div
+					label(for="branch") Sucursal:
+				div
+					label(for="project") Proyecto:
+				div 
+			div.control_menu
+				div
+					input(type="text" name="search") 	
+				div
+					select(name="mov")
+				div
+					select(name="status")
+						option(value="(Todos)") Todos
+						option(value="(por Autorizar)") Por Autorizar
+						//- option(value="(en Firme)") En Firme
+						option(value="Sin Afectar") Sin Afectar
+						option(value="por Confirmar") Por Confirmar
+						option(value="Borrador") Borrador
+						option(value="Pendiente", selected) Pendiente
+						option(value="Sincronizacion") Sincronizacion
+						option(value="Recurrente") Recurrentes
+						option(value="Concluido") Concluidos
+						option(value="Cancelado") Cancelados
+				div
+					select(name="date")
+						option(value="(Todo)") Todo
+						option(value="Hoy") Hoy
+						option(value="Ayer") Ayer
+						option(value="Mañana") Mañana
+						option(value="Esta Semana") Esta Semana
+						option(value="Semana Pasada") Semana Pasada
+						option(value="Este Mes") Este Mes
+						option(value="Mes Móvil") Mes Móvil
+						option(value="Mes Pasado") Mes Pasado
+						option(value="Este Año") Este Año
+						option(value="Año Móvil") Año Movil
+						option(value="Año Pasado") Año Pasado
+						option(value="Enero") Enero
+						option(value="Febrero") Febrero
+						option(value="Marzo") Marzo
+						option(value="Abril") Abril
+						option(value="Mayo") Mayo
+						option(value="Junio") Junio
+						option(value="Julio") Julio
+						option(value="Agosto") Agosto
+						option(value="Septiembre") Septiembre
+						option(value="Octubre") Octubre
+						option(value="Noviembre") Noviembre
+						option(value="Diciembre") Diciembre
+						//- option(value="Especifica...") Especifica
+				div
+					select(name="user")
+				div
+					select(name="branch")
+						option(value="(Todas)") Todas
+						option(value="0") Matriz
+						option(value="1") Planta Coloradas
+						option(value="2") Merida
+						option(value="3") Mexico
+						option(value="4") Cancun
+						option(value="5") Planta Tizimin
+						option(value="7") Tampico
+						option(value="8") Puebla
+						option(value="9") Queretaro
+						option(value="11") Veracruz
+						option(value="12") Guadalajara
+						option(value="13") Villahermosa
+						
+				div
+					select(name="project")
+				div
+					input#control_filter(type="button" name="control_filter" value="filtrar")
+			div#control_panel_results
+				#titles_row
+					div Movimiento
+					div Proveedor
+					div Referencia
+					div Concepto
+					div Fecha Emisión
+					div Vencimiento
+					div Importe Total
+					div Saldo
+				.content_row
+					div Solicitud
+					div Abarrrotes del ponienteaaaaaa
+					div P2000
+					div PANECITOS
+					div 10 Feb 2012
+					div 20 Feb 2015
+					div $.01
+					div $100
+
+	script Dropdown.applyTo(document.getElementById('menu_list'));
+
+
+	
+
+				

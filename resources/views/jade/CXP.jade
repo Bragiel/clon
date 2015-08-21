@@ -1,0 +1,74 @@
+
+.row
+    label.label_container Movimiento: 
+    .data_container(style="width:180px;") &nbsp
+        - echo $data['Mov'];
+    .data_container(style="width:70px;") &nbsp
+        - echo $data['MovID'];
+    label.label_container Proyecto: 
+    .data_container(style="width:120px;") &nbsp
+        - echo $data['Proyecto'];
+    
+    label.label_container Moneda:
+    .data_container(style="width:70px;") &nbsp 
+        - echo $data['Moneda'];
+    .data_container(style="width:40px;") &nbsp
+        - echo $data['TipoCambio'];
+.row_panel
+    label.label_container Fecha Emisión: 
+    .data_container(style="width:120px;") &nbsp 
+        - echo date('d/m/Y', strtotime($data['FechaEmision']));
+.row_panel
+    hr
+.row_panel
+    label.label_container Proveedor: 
+    .data_container(style="width:120px;") &nbsp
+        - echo $data['Proveedor'];
+    .data_container(style="width:320px;") &nbsp
+        - echo utf8_encode($data['Nombre']);
+.row_panel
+    label.label_container Importe: 
+    .data_container(style="width:120px;") &nbsp
+        - echo '$ '.number_format($value['Importe'], 2);
+        
+    .data_container(style="width:120px; float:right;") &nbsp
+        - echo '$ '.number_format($value['Saldo'], 2);
+    .data_container(style="width:120px; float:right;") &nbsp
+        - echo '$ '.number_format($value['Impuestos'], 2);
+    label.label_container(style="float:right;") Impuestos: 
+    
+.row_panel
+    label.label_container Concepto: 
+    .data_container(style="width:300px;") &nbsp
+        - echo $value['Concepto'];
+    .data_container(style="width:120px; float:right;") &nbsp
+        - echo '$ '.number_format($value['Retencion2'], 2);
+.row_panel
+    label.label_container Referencia: 
+    .data_container(style="width:120px;") &nbsp
+        - echo $data['Referencia'];
+    label.label_container Condicion Pago: 
+    .data_container(style="width:120px;") &nbsp
+        - echo $data['Condicion'];
+    label.label_container Vencimiento: 
+    .data_container(style="width:120px;") &nbsp 
+        - echo date('d/m/Y', strtotime($data['Vencimiento']));
+.row_panel
+    label.label_container Observaciones: 
+    .data_container(style="width:300px;") &nbsp
+        - echo $data['Observaciones'];
+    .data_container(style="width:120px; float:right;") &nbsp
+        - echo '$ '.number_format($value['Retencion2'], 2);
+.row_panel
+    label.label_container Saldo Proveedor: 
+    .data_container(style="width:120px;") &nbsp
+        - echo $data['ProveedorMoneda'];
+    .data_container(style="width:120px;") &nbsp
+        - echo $data['ProveedorTipoCambio'];
+    .data_container(style="width:120px;") &nbsp
+        - echo '$ '.number_format($value['SaldoPendiente'], 2);
+    
+
+.row_panel(style="margin-top:40px;")
+    a(href="javascript: self.close()")
+        input#back_btn(type="button", value="cerrar")
